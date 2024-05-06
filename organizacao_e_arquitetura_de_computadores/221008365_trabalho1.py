@@ -3,33 +3,7 @@ import struct
 
 mem = np.zeros(16384, dtype=np.uint8)
 
-def lw(reg, kte):
-    address = reg + kte;
-    if address % 4 == 0:
-        return mem[address:address+4].view(dtype = np.uint32)[0]
-    else:
-        return
 
-def lb(reg, kte):
-    address = reg + kte;
-    byte = mem[address:address+1].view(dtype = np.int8)[0]
-    return np.uint32(byte | 0x00000000)
-
-def lbu(reg, kte):
-    address = reg + kte;
-    byte = mem[address:address+1].view(dtype = np.uint8)[0]
-    return np.uint32(byte | 0x00000000)
-
-def sw(reg, kte, word):
-    address = reg + kte;
-    if (address % 4) == 0:
-        bs = struct.pack('<I', word)
-        ba = np.frombuffer(bs, dtype = np.uint8)
-        mem[address:address + 4] = ba
-
-def sb(reg, kte, byte):
-    address = reg + kte;
-    mem[address:address+1] = byte
 
 """
 #--------------- Exemplo de uso ---------------
