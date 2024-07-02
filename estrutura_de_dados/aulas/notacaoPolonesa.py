@@ -4,7 +4,7 @@ AB*CD/- => (A*B)-(C/D)
 Infixa      posfixa
 
 A ideia do código transformar uma operação infixa e converte-la para posfixa
-leia: A + (B * C - (D / E / F) * G) * H
+leia: A+(B*C-(D/E/F)*G)*H
 transforme: ABC*DEF//G*-H*+
 
 Como fazer
@@ -20,27 +20,30 @@ def notacaoPolonesa(expressao):
     pilha = Stack()
     notacaoPolonesa = []
     i = 0
-    for i in range (len(expressao)):
-        if (expressao[i] == "+") or (expressao[i] == "-") or (expressao[i] == "*") or (expressao[i] == "/"):
-            if pilha.isEmpty == True:
+    for i in range(len(expressao)):
+        if expressao[i] == ")" or expressao[i] == "(" or (expressao[i] == "+") or (expressao[i] == "-") or (expressao[i] == "*") or (expressao[i] == "/"):
+            if pilha.isEmpty():
                 pilha.push(expressao[i])
             else:
-                if ord(pilha.peek()) <= ord(expressao[i]):
+                if expressao[i] == ')':
+                    while not pilha.isEmpty() and pilha.peek() != '(':
+                        notacaoPolonesa.append(pilha.pop())
+                    if not pilha.isEmpty() and pilha.peek() == '(':
+                        pilha.pop()
+                elif (pilha.peek() == '*' or pilha.peek() == '/') and (expressao[i] == '+' or expressao[i] == '-'):
+                    while (not pilha.isEmpty()) and (pilha.peek() != '('):
+                        notacaoPolonesa.append(pilha.pop())
                     pilha.push(expressao[i])
                 else:
-                    while not pilha.isEmpty():
-                        notacaoPolonesa.append(pilha.pop())
+                    pilha.push(expressao[i])
         else:
-            if expressao[i] == ")":
-                while pilha.peek()!='(' and not pilha.isEmpty():
-                    notacaoPolonesa.append(pilha.pop())
-                pilha.pop()
-            else:
-                notacaoPolonesa.append(expressao[i])
-            print(notacaoPolonesa)
-    return notacaoPolonesa
+            notacaoPolonesa.append(expressao[i])
 
-expressao = "A+B/C+D"
+    while not pilha.isEmpty():
+        notacaoPolonesa.append(pilha.pop())
 
-print(notacaoPolonesa(expressao))
+    print(notacaoPolonesa)
+
+
+notacaoPolonesa("A+(B*C-(D/E/F)*G)*H")
 
