@@ -5,6 +5,7 @@
 """
 from pythonds.basic.queue import Queue
 
+
 class Seletor:
     def __init__(self) -> None:
         self.fifo = Queue()
