@@ -1,11 +1,28 @@
+def partition(arr, low, high):
+  i = low - 1
+  pivot = arr[high]
+  for j in range(low, high):
+      if arr[j] >= pivot:
+          i += 1
+          arr[i], arr[j] = arr[j], arr[i]
+  arr[i + 1], arr[high] = arr[high], arr[i + 1]
+  return i + 1
+
+def quickSort(arr, low, high):
+  if low < high:
+      pi = partition(arr, low, high)
+      quickSort(arr, low, pi - 1)
+      quickSort(arr, pi + 1, high)
+  return arr
 
 
 
 def choosingCubes(n, cubosRolados, f, k):
-    valFavorito = cubosRolados[f]
+    valFavorito = cubosRolados[f-1]
     #cubosRolados = reverse_merge_sort(n, cubosRolados) #não esquecer de fazer o reverse_merge_sort()
     dadosePosicoes = {}
 
+    cubosRolados = quickSort(cubosRolados, 0, n-1)
     for i in range(n):
         dadosePosicoes[cubosRolados[i]] = []
     for i in range(n):

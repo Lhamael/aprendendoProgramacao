@@ -1,14 +1,17 @@
 def binarySearch(arr, item):
-    middle = len(arr) // 2
-    if len(arr) == 0:
-        return -1
-    else:
-        if ord(item) == ord(arr[middle]):
+
+    first = 0
+    last = len(arr) - 1
+    while first <= last:
+        middle = (first + last) // 2
+        if arr[middle] == item:
             return middle
-        elif ord(item) < ord(arr[middle]):
-            return binarySearch(arr[:middle], item)
+        elif ord(arr[middle]) < ord(item):
+            first = middle + 1
+
         else:
-            return binarySearch(arr[middle+1:], item)
+            last = middle - 1
+    return -1
         
 def merge(esquerda, direita):
     vetor = []
@@ -49,7 +52,7 @@ def symmetricEncoding(qtdCarac, palavra):
     r = merge_sort(r)
 
     for i in range(qtdCarac):
-        posiLetra = binarySearch(r, palavra[i])
+        posiLetra = binarySearch(r,palavra[i])
         resposta += r[(len(r)-posiLetra)-1]
 
     return resposta
