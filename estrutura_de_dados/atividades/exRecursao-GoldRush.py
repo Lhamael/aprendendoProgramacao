@@ -1,18 +1,15 @@
 def verifica(pilhaInicial, resultado):
-    if pilhaInicial == resultado:
-        return "Yes"
-    elif pilhaInicial < resultado:
-        return "No"
-    else:
-        return verifica(desenpilhador(pilhaInicial, 0), resultado)
+  if pilhaInicial == resultado:
+      return True
+  if pilhaInicial%3 !=0:
+      return False
 
-def desenpilhador(pilha1, pilha2):
-    if pilha1 <= 2*pilha2:
-        return pilha1
-    else:
-        return desenpilhador(pilha1-1, pilha2+1)
+  return verifica(pilhaInicial//3, resultado) or verifica((pilhaInicial//3)*2, resultado)
 
 testes = int(input())
 for i in range(testes):
-    pilhainicial, resultado = input().split()
-    print(verifica(int(pilhainicial), int(resultado)))
+  pilhainicial, resultado = input().split()
+  if verifica(int(pilhainicial), int(resultado)):
+    print("Yes")
+  else:
+    print("No")

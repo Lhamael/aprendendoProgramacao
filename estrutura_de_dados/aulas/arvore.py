@@ -56,6 +56,40 @@ class Arvore:
                 if neto:
                     return neto.getNo(valor)
 
+class ArvoreBinaria:
+   def __init__(self, obj):
+       self.raiz = obj
+       self.esq = None
+       self.dir = None
+
+    def insereEsq(self, novoNo):
+        if self.esq == None:
+            self.esq = ArvoreBinaria(novoNo)
+        else:
+            folha = ArvoreBinaria(novoNo)
+            folha.esq = self.esq
+            self.esq = folha
+
+    def insereDir(self, novoNo):
+        if self.dir == None:
+            self.dir = ArvoreBinaria(novoNo)
+        else:
+            folha = ArvoreBinaria(novoNo)
+            folha.dir = self.dir
+            self.dir = folha
+
+    def getFilhoDireita(self):
+        return self.dir
+
+    def getFilhoEsq(self):
+        return self.esq
+
+    def setRaiz(self, obj):
+        self.raiz = obj
+
+    def getRaiz(self):
+        return self.raiz
+
             
 h = Arvore()
 
