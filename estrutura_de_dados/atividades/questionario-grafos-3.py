@@ -50,7 +50,7 @@ def sistemaTubulucacao(dadosVizinhanca):
     else:
       temp = distancias[residencia][1]
       soma += distancias[residencia][0] - distancias[temp][0]
-  print(f"R$ {soma*3.14}")
+  print(f"R$ {soma*3.14:.2f}")
 
 
 
